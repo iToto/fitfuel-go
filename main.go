@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fitfuel/routes"
 	"github.com/codegangsta/martini"
 )
 
@@ -9,5 +10,6 @@ func main() {
 	m.Get("/", func() string {
 		return "Welcome To FitFuel"
 	})
+	m.Get("/fuel", fuel.Index)
 	m.Run()
 }
