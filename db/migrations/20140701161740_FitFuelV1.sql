@@ -13,10 +13,15 @@
 -- SQL in section 'Up' is executed when this migration is applied
 /* SQLEditor (Postgres)*/
 
+/* SQLEditor (Postgres)*/
+
 CREATE TABLE resources
 (
 id SERIAL NOT NULL UNIQUE,
 name VARCHAR(255) UNIQUE,
+created_at TIMESTAMP,
+updated_at TIMESTAMP,
+deleted_at TIMESTAMP,
 PRIMARY KEY (id)
 );
 
@@ -40,6 +45,9 @@ id SERIAL NOT NULL UNIQUE,
 user_id INTEGER NOT NULL,
 total_in BIGINT,
 total_out BIGINT,
+created_at TIMESTAMP,
+updated_at TIMESTAMP,
+deleted_at TIMESTAMP,
 PRIMARY KEY (id)
 );
 
@@ -50,15 +58,23 @@ user_id INTEGER NOT NULL,
 resource_id INTEGER NOT NULL,
 api_token VARCHAR(255),
 secret VARCHAR(255),
-id_1 INTEGER
+created_at TIMESTAMP,
+updated_at TIMESTAMP,
+deleted_at TIMESTAMP
 );
 
 CREATE INDEX resources_id_idx ON resources(id);
+
 CREATE INDEX users_username_idx ON users(username);
+
 CREATE INDEX users_email_idx ON users(email);
+
 CREATE INDEX fit_fuel_id_idx ON fit_fuel(id);
+
 ALTER TABLE fit_fuel ADD FOREIGN KEY (user_id) REFERENCES users (id);
+
 ALTER TABLE users_resources ADD FOREIGN KEY (user_id) REFERENCES users (id);
+
 ALTER TABLE users_resources ADD FOREIGN KEY (resource_id) REFERENCES resources (id);
 
 -- +goose Down
