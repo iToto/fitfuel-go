@@ -1,0 +1,7 @@
+test:
+    driver: postgres
+    open: user={DB_TEST_USER} dbname={DB_TEST_NAME} sslmode=disable
+
+development:
+    driver: postgres
+    open: user={DB_USER} dbname={DB_NAME} sslmode=disable host={DB_HOST} password={DB_PASSWORD}
