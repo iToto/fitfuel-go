@@ -2,14 +2,34 @@ package main
 
 import (
 	"fitfuel/routes"
-	"github.com/codegangsta/martini"
+	"flag"
+	"fmt"
+	"log"
+	"net/http"
 )
 
+var (
+	port int
+)
+
+func init() {
+	flag.IntVar(&port, "port", 8080, "HTTP Server Port")
+	flag.Parse()
+}
+
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome to the FitFuel API")
+}
+
 func main() {
-	m := martini.Classic()
-	m.Get("/", func() string {
-		return "Welcome To FitFuel"
-	})
-	m.Get("/fuel", fuel.Index)
-	m.Run()
+
+	httpAddr := fmt.Sprintf(":%v", port)
+
+	// ROUTES
+	http.HandleFunc("/", rootHandler)
+	http.HandleFunc("/fuel", fuel.Index)
+
+	// START SERVER
+	log.Printf("Listening to %v", httpAddr)
+	log.Fatal(http.ListenAndServe(httpAddr, nil))
 }
