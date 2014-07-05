@@ -4,7 +4,7 @@ fitfuel-go
 A simple REST API that allows you to use Fitness as a resource for an application.
 
 # Stack
-* [Golang](http://golang.org/) using [Martini](http://martini.codegangsta.io/)
+* [Golang](http://golang.org/)
 * PostgreSQL
 
 # Pre-Requisites
